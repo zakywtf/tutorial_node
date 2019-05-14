@@ -5,7 +5,7 @@ import h from '../lib/ctrlHandler'
 let router = Router()
 
 router.route('/')
-    .post(
+    .get(
         async (req, res) =>{
           h(req,res,async(body)=>{
             return await LogModel.find().exec()
