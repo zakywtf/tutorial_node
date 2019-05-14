@@ -10,6 +10,10 @@ var _log_user = _interopRequireDefault(require("./controller/log_user"));
 
 var _log = _interopRequireDefault(require("./controller/log"));
 
+var _users = _interopRequireDefault(require("./controller/users"));
+
+var _login = _interopRequireDefault(require("./controller/login"));
+
 var _db = require("./models/db");
 
 var _bodyParser = _interopRequireDefault(require("body-parser"));
@@ -37,6 +41,8 @@ app.get('/', function (req, res) {
 app.use('/names', _names["default"]);
 app.use('/log_user', _log_user["default"]);
 app.use('/log', _log["default"]);
+app.use('/users', _users["default"]);
+app.use('/login', _login["default"]);
 (0, _db.connectDb)().then(
 /*#__PURE__*/
 _asyncToGenerator(

@@ -2,7 +2,11 @@
 
 var _express = require("express");
 
-var _log_user = _interopRequireDefault(require("../models/log_user"));
+var _bcryptjs = _interopRequireDefault(require("bcryptjs"));
+
+var _dotenv = _interopRequireDefault(require("dotenv"));
+
+var _users = _interopRequireDefault(require("../models/users"));
 
 var _ctrlHandler = _interopRequireDefault(require("../lib/ctrlHandler"));
 
@@ -11,6 +15,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+_dotenv["default"].config();
 
 var router = (0, _express.Router)();
 router.route('/').get(
@@ -34,7 +40,7 @@ function () {
                     switch (_context.prev = _context.next) {
                       case 0:
                         _context.next = 2;
-                        return _log_user["default"].find().exec();
+                        return _users["default"].find().exec();
 
                       case 2:
                         return _context.abrupt("return", _context.sent);
@@ -69,35 +75,36 @@ function () {
   var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee3(req, res) {
-    var log_user, result;
+    var user, result;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.prev = 0;
-            log_user = new _log_user["default"](req.body);
-            _context3.next = 4;
-            return log_user.save();
+            req.body.password = _bcryptjs["default"].hashSync(req.body.password + process.env.SALT, 10);
+            user = new _users["default"](req.body);
+            _context3.next = 5;
+            return user.save();
 
-          case 4:
+          case 5:
             result = _context3.sent;
             res.send(result);
-            _context3.next = 11;
+            _context3.next = 12;
             break;
 
-          case 8:
-            _context3.prev = 8;
+          case 9:
+            _context3.prev = 9;
             _context3.t0 = _context3["catch"](0);
             return _context3.abrupt("return", res.status(500).json({
               error: _context3.t0.message
             }));
 
-          case 11:
+          case 12:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[0, 8]]);
+    }, _callee3, null, [[0, 9]]);
   }));
 
   return function (_x4, _x5) {

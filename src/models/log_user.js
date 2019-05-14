@@ -12,4 +12,3 @@ const LogModel = mongoose.Schema({
 })
 
 module.exports = mongoose.model('log_users', LogModel);
-
