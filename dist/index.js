@@ -4,8 +4,6 @@ var _express = _interopRequireDefault(require("express"));
 
 var _dotenv = _interopRequireDefault(require("dotenv"));
 
-var _names = _interopRequireDefault(require("./controller/names"));
-
 var _log_user = _interopRequireDefault(require("./controller/log_user"));
 
 var _log = _interopRequireDefault(require("./controller/log"));
@@ -38,7 +36,6 @@ app.get('/', function (req, res) {
 //     res.json()
 // })
 
-app.use('/names', _names["default"]);
 app.use('/log_user', _log_user["default"]);
 app.use('/log', _log["default"]);
 app.use('/users', _users["default"]);

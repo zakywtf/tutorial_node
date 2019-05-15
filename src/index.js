@@ -1,6 +1,5 @@
 import xpress from 'express'
 import dotenv from 'dotenv'
-import cnames from './controller/names'
 import log_user from './controller/log_user'
 import log from './controller/log'
 import users from './controller/users'
@@ -22,7 +21,6 @@ app.get('/', (req, res)=>{
 //     res.json()
 // })
 
-app.use('/names', cnames)
 app.use('/log_user', log_user)
 app.use('/log', log)
 app.use('/users', users)
