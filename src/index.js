@@ -1,10 +1,9 @@
 import xpress from 'express'
 import dotenv from 'dotenv'
-import log_user from './controller/log_user'
 import log from './controller/log'
 import users from './controller/users'
 import login from './controller/login'
-import { connectDb } from './models/db';
+import { connectDb } from './config/db';
 import bodyParser from 'body-parser'
 
 
@@ -21,11 +20,9 @@ app.get('/', (req, res)=>{
 //     res.json()
 // })
 
-app.use('/log_user', log_user)
-app.use('/log', log)
-app.use('/users', users)
-app.use('/login', login)
-
+app.use('/api/v1/log', log)
+app.use('/api/v1/users', users)
+app.use('/api/v1/login', login)
 
 connectDb().then(async () => {
     app.listen(process.env.PORT, '127.0.0.1', () =>

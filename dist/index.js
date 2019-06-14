@@ -4,15 +4,13 @@ var _express = _interopRequireDefault(require("express"));
 
 var _dotenv = _interopRequireDefault(require("dotenv"));
 
-var _log_user = _interopRequireDefault(require("./controller/log_user"));
-
 var _log = _interopRequireDefault(require("./controller/log"));
 
 var _users = _interopRequireDefault(require("./controller/users"));
 
 var _login = _interopRequireDefault(require("./controller/login"));
 
-var _db = require("./models/db");
+var _db = require("./config/db");
 
 var _bodyParser = _interopRequireDefault(require("body-parser"));
 
@@ -36,10 +34,9 @@ app.get('/', function (req, res) {
 //     res.json()
 // })
 
-app.use('/log_user', _log_user["default"]);
-app.use('/log', _log["default"]);
-app.use('/users', _users["default"]);
-app.use('/login', _login["default"]);
+app.use('/api/v1/log', _log["default"]);
+app.use('/api/v1/users', _users["default"]);
+app.use('/api/v1/login', _login["default"]);
 (0, _db.connectDb)().then(
 /*#__PURE__*/
 _asyncToGenerator(

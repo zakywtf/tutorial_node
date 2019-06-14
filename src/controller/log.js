@@ -1,15 +1,17 @@
 import {Router} from 'express'
 import LogModel from '../models/log_user'
 import h from '../lib/ctrlHandler'
+import {validateToken, payload} from '../lib/validateToken'
 
 let router = Router()
 
 router.route('/')
-    .get(
+    .get(validateToken,
         async (req, res) =>{
-          h(req,res,async(body)=>{
-            return await LogModel.find().exec()
-          })
+            // console.log(payload)
+            h(req,res,async(body)=>{
+                return await LogModel.find().exec()
+            })
         }
     )
     .post(

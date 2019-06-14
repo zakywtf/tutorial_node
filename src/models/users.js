@@ -14,4 +14,13 @@ const users = mongoose.Schema({
     }
 })
 
+users.statics.toApiUserSchema = function(data) {
+    return data.map(function(user) {
+        return {
+            id: user.id,
+            username: user.username
+        }
+    })
+}
+
 module.exports = mongoose.model('users', users);

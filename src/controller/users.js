@@ -10,9 +10,12 @@ let router = Router()
 router.route('/')
     .get(
         async (req, res) =>{
-          h(req,res,async(body)=>{
-            return await users.find().exec()
-          })
+            users.find({}, async function(err, user) {
+                var data = await users.toApiUserSchema(user)
+                h(req,res,async(body)=>{
+                    return data
+                })
+            })
         }
     )
     .post(

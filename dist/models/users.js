@@ -18,4 +18,13 @@ var users = _mongoose["default"].Schema({
   }
 });
 
+users.statics.toApiUserSchema = function (data) {
+  return data.map(function (user) {
+    return {
+      id: user.id,
+      username: user.username
+    };
+  });
+};
+
 module.exports = _mongoose["default"].model('users', users);
