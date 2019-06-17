@@ -12,7 +12,12 @@ const users = mongoose.Schema({
     first_name: String,
     last_name: String,
     address:String,
-    telp:String,
+    telp:{
+        type:String,
+        index : {
+            unique:true
+        }
+    },
     email:{
         type:String,
         index : {

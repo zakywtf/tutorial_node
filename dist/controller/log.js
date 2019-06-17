@@ -35,7 +35,7 @@ function () {
                   while (1) {
                     switch (_context3.prev = _context3.next) {
                       case 0:
-                        if (!(body.payload.role == 2)) {
+                        if (!(body.payload.role == 2 || body.payload.role == 1)) {
                           _context3.next = 4;
                           break;
                         }
@@ -88,24 +88,16 @@ function () {
                           };
                         }());
 
-                        _context3.next = 9;
+                        _context3.next = 5;
                         break;
 
                       case 4:
-                        if (!(body.payload.role != 2)) {
-                          _context3.next = 8;
-                          break;
-                        }
-
                         return _context3.abrupt("return", res.status(404).send({
                           error: 1,
                           message: 'No token provided.'
                         }));
 
-                      case 8:
-                        return _context3.abrupt("return", "ini salah");
-
-                      case 9:
+                      case 5:
                       case "end":
                         return _context3.stop();
                     }

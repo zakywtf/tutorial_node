@@ -8,7 +8,7 @@ const handleRequest = async (req, res, callback) =>{
         errorName:''
     }
     try {
-        jres.data = await callback(req.body)        
+        jres.data = await callback(req.body)  
     } catch (error) {
         jres.error=500
         jres.message=error.message

@@ -9,18 +9,15 @@ router.route('/')
     .get(
         async (req, res) =>{
             validateToken(req,res,async(body)=>{
-                if(body.payload.role == 2){
+                if(body.payload.role == 2 || body.payload.role == 1){
                     LogModel.find({}, async function(err, log) {
                         var data = await LogModel.toApiLogmodelSchema(log)
                             h(req,res,async()=>{
                                 return data
                             })
                         })
-                } else if(body.payload.role != 2){
-                    return res.status(404).send({ error: 1, message: 'No token provided.' });
-
                 } else{
-                    return "ini salah"
+                    return res.status(404).send({ error: 1, message: 'No token provided.' });
                 }
             })
             // 
