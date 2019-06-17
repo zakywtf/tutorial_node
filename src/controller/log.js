@@ -1,17 +1,29 @@
 import {Router} from 'express'
 import LogModel from '../models/log_user'
 import h from '../lib/ctrlHandler'
-import {validateToken, payload} from '../lib/validateToken'
+import validateToken from '../lib/validateToken'
 
 let router = Router()
 
 router.route('/')
-    .get(validateToken,
+    .get(
         async (req, res) =>{
-            // console.log(payload)
-            h(req,res,async(body)=>{
-                return await LogModel.find().exec()
+            validateToken(req,res,async(body)=>{
+                if(body.payload.role == 2){
+                    LogModel.find({}, async function(err, log) {
+                        var data = await LogModel.toApiLogmodelSchema(log)
+                            h(req,res,async()=>{
+                                return data
+                            })
+                        })
+                } else if(body.payload.role != 2){
+                    return res.status(404).send({ error: 1, message: 'No token provided.' });
+
+                } else{
+                    return "ini salah"
+                }
             })
+            // 
         }
     )
     .post(

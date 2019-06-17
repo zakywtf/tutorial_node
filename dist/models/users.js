@@ -7,14 +7,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 var users = _mongoose["default"].Schema({
   username: {
     type: String,
-    required: true,
-    index: {
-      unique: true
-    }
+    required: true
   },
   password: {
     type: String,
     required: true
+  },
+  first_name: String,
+  last_name: String,
+  address: String,
+  telp: String,
+  email: {
+    type: String,
+    index: {
+      unique: true
+    }
+  },
+  role: {
+    type: String,
+    "enum": ['1', '2', '3']
   }
 });
 
@@ -22,7 +33,12 @@ users.statics.toApiUserSchema = function (data) {
   return data.map(function (user) {
     return {
       id: user.id,
-      username: user.username
+      username: user.username,
+      name: user.first_name + ' ' + user.last_name,
+      address: user.address,
+      telp: user.telp,
+      email: user.email,
+      role: user.role
     };
   });
 };

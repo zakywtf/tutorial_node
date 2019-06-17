@@ -30,21 +30,16 @@ function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.prev = 0;
-            _context.next = 3;
+            _context.next = 2;
             return _users["default"].findOne({
               username: req.body.username
             }).exec();
 
-          case 3:
+          case 2:
             user = _context.sent;
-            payload = {
-              id: user.id,
-              username: user.username
-            };
 
             if (user) {
-              _context.next = 7;
+              _context.next = 5;
               break;
             }
 
@@ -53,9 +48,9 @@ function () {
               message: "The username does not exist"
             }));
 
-          case 7:
+          case 5:
             if (_bcryptjs["default"].compareSync(req.body.password + process.env.SALT, user.password)) {
-              _context.next = 9;
+              _context.next = 7;
               break;
             }
 
@@ -64,7 +59,14 @@ function () {
               message: "The password is invalid"
             }));
 
-          case 9:
+          case 7:
+            _context.prev = 7;
+            payload = {
+              id: user.id,
+              username: user.username,
+              role: user.role
+            };
+
             _jsonwebtoken["default"].sign({
               payload: payload
             }, process.env.SECRET_KEY, {
@@ -74,7 +76,15 @@ function () {
                 error: 0,
                 data: {
                   token: token,
-                  payload: payload
+                  user_data: {
+                    id: user.id,
+                    username: user.username,
+                    name: user.first_name + ' ' + user.last_name,
+                    address: user.address,
+                    telp: user.telp,
+                    email: user.email,
+                    role: user.role
+                  }
                 }
               });
             });
@@ -84,7 +94,7 @@ function () {
 
           case 12:
             _context.prev = 12;
-            _context.t0 = _context["catch"](0);
+            _context.t0 = _context["catch"](7);
             return _context.abrupt("return", res.status(500).json({
               error: _context.t0.message
             }));
@@ -94,7 +104,7 @@ function () {
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 12]]);
+    }, _callee, null, [[7, 12]]);
   }));
 
   return function (_x, _x2) {
