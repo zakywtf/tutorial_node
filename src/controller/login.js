@@ -18,7 +18,7 @@ router.route('/')
             }
             try{
                 const payload = {id:user.id, username:user.username, role:user.role}
-                jwt.sign({ payload }, process.env.SECRET_KEY, { algorithm: 'HS256' }, function(err, token) {
+                jwt.sign({ payload }, process.env.SECRET_KEY, { algorithm: 'HS256', expiresIn: '1h'}, function(err, token) {
                     res.json({
                         error: 0,
                         data: {

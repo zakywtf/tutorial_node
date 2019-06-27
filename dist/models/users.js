@@ -31,7 +31,8 @@ var users = _mongoose["default"].Schema({
   role: {
     type: String,
     "enum": ['1', '2', '3']
-  }
+  },
+  create_at: Date
 });
 
 users.statics.toApiUserSchema = function (data) {

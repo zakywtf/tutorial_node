@@ -6,11 +6,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var Schema = _mongoose["default"].Schema;
 var user_detail = Schema({
-  user_id: [{
+  user_data: {
     type: Schema.Types.ObjectId,
     ref: 'users'
-  }],
+  },
   company: {
+    type: String,
+    required: true
+  },
+  company_address: {
+    type: String,
+    required: true
+  },
+  company_email: {
+    type: String,
+    required: true
+  },
+  company_telp: {
     type: String,
     required: true
   },

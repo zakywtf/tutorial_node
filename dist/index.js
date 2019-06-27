@@ -6,11 +6,15 @@ var _dotenv = _interopRequireDefault(require("dotenv"));
 
 var _log = _interopRequireDefault(require("./controller/log"));
 
-var _users = _interopRequireDefault(require("./controller/users"));
+var _users = _interopRequireDefault(require("./controller/users/users"));
 
 var _login = _interopRequireDefault(require("./controller/login"));
 
 var _signup = _interopRequireDefault(require("./controller/signup"));
+
+var _vehicles = _interopRequireDefault(require("./controller/vehicles/vehicles"));
+
+var _add_vehicles = _interopRequireDefault(require("./controller/vehicles/add_vehicles"));
 
 var _db = require("./config/db");
 
@@ -40,6 +44,8 @@ app.use('/api/v1/log', _log["default"]);
 app.use('/api/v1/users', _users["default"]);
 app.use('/api/v1/login', _login["default"]);
 app.use('/api/v1/signup', _signup["default"]);
+app.use('/api/v1/add_vehicles', _add_vehicles["default"]);
+app.use('/api/v1/vehicles', _vehicles["default"]);
 (0, _db.connectDb)().then(
 /*#__PURE__*/
 _asyncToGenerator(

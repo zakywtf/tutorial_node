@@ -17,8 +17,11 @@ router.route('/')
                 let result_user = await user.save()
                 if(req.body.role == 2){
                     let user_detail = new userDetail({
-                        user_id : result_user._id,
+                        user_data : result_user._id,
                         company : req.body.company,
+                        company_address : req.body.company_address,
+                        company_email : req.body.company_email,
+                        company_telp : req.body.company_telp,
                         start_time_available : req.body.start_time_available,
                         end_time_available : req.body.end_time_available
                     })

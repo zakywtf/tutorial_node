@@ -70,7 +70,8 @@ function () {
             _jsonwebtoken["default"].sign({
               payload: payload
             }, process.env.SECRET_KEY, {
-              algorithm: 'HS256'
+              algorithm: 'HS256',
+              expiresIn: '1h'
             }, function (err, token) {
               res.json({
                 error: 0,

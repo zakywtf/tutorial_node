@@ -6,13 +6,11 @@ var _bcryptjs = _interopRequireDefault(require("bcryptjs"));
 
 var _dotenv = _interopRequireDefault(require("dotenv"));
 
-var _users = _interopRequireDefault(require("../models/users"));
+var _users = _interopRequireDefault(require("../../models/users"));
 
-var _user_detail = _interopRequireDefault(require("../models/user_detail"));
+var _user_detail = _interopRequireDefault(require("../../models/user_detail"));
 
-var _ctrlHandler = _interopRequireDefault(require("../lib/ctrlHandler"));
-
-var _validateToken = _interopRequireDefault(require("../lib/validateToken"));
+var _validateToken = _interopRequireDefault(require("../../lib/validateToken"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -28,23 +26,23 @@ router.route('/').get(
 function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee4(req, res) {
-    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+  regeneratorRuntime.mark(function _callee3(req, res) {
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
-        switch (_context4.prev = _context4.next) {
+        switch (_context3.prev = _context3.next) {
           case 0:
             (0, _validateToken["default"])(req, res,
             /*#__PURE__*/
             function () {
               var _ref2 = _asyncToGenerator(
               /*#__PURE__*/
-              regeneratorRuntime.mark(function _callee3(body) {
-                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+              regeneratorRuntime.mark(function _callee2(body) {
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
                   while (1) {
-                    switch (_context3.prev = _context3.next) {
+                    switch (_context2.prev = _context2.next) {
                       case 0:
                         if (!(body.payload.role == 1)) {
-                          _context3.next = 4;
+                          _context2.next = 4;
                           break;
                         }
 
@@ -53,42 +51,28 @@ function () {
                         function () {
                           var _ref3 = _asyncToGenerator(
                           /*#__PURE__*/
-                          regeneratorRuntime.mark(function _callee2(err, log) {
+                          regeneratorRuntime.mark(function _callee(err, log) {
                             var data;
-                            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                            return regeneratorRuntime.wrap(function _callee$(_context) {
                               while (1) {
-                                switch (_context2.prev = _context2.next) {
+                                switch (_context.prev = _context.next) {
                                   case 0:
-                                    _context2.next = 2;
+                                    _context.next = 2;
                                     return _users["default"].toApiUserSchema(log);
 
                                   case 2:
-                                    data = _context2.sent;
-                                    (0, _ctrlHandler["default"])(req, res,
-                                    /*#__PURE__*/
-                                    _asyncToGenerator(
-                                    /*#__PURE__*/
-                                    regeneratorRuntime.mark(function _callee() {
-                                      return regeneratorRuntime.wrap(function _callee$(_context) {
-                                        while (1) {
-                                          switch (_context.prev = _context.next) {
-                                            case 0:
-                                              return _context.abrupt("return", data);
-
-                                            case 1:
-                                            case "end":
-                                              return _context.stop();
-                                          }
-                                        }
-                                      }, _callee);
-                                    })));
+                                    data = _context.sent;
+                                    return _context.abrupt("return", res.status(200).send({
+                                      error: 0,
+                                      data: data
+                                    }));
 
                                   case 4:
                                   case "end":
-                                    return _context2.stop();
+                                    return _context.stop();
                                 }
                               }
-                            }, _callee2);
+                            }, _callee);
                           }));
 
                           return function (_x4, _x5) {
@@ -96,12 +80,12 @@ function () {
                           };
                         }());
 
-                        _context3.next = 9;
+                        _context2.next = 9;
                         break;
 
                       case 4:
                         if (!(body.payload.role == 2)) {
-                          _context3.next = 8;
+                          _context2.next = 8;
                           break;
                         }
 
@@ -136,79 +120,38 @@ function () {
                           });
                         });
 
-                        _context3.next = 9;
+                        _context2.next = 9;
                         break;
 
                       case 8:
-                        return _context3.abrupt("return", res.status(404).send({
+                        return _context2.abrupt("return", res.status(404).send({
                           error: 1,
                           message: 'No token provided.'
                         }));
 
                       case 9:
                       case "end":
-                        return _context3.stop();
+                        return _context2.stop();
                     }
                   }
-                }, _callee3);
+                }, _callee2);
               }));
 
               return function (_x3) {
                 return _ref2.apply(this, arguments);
               };
-            }()); // 
+            }());
 
           case 1:
           case "end":
-            return _context4.stop();
+            return _context3.stop();
         }
       }
-    }, _callee4);
+    }, _callee3);
   }));
 
   return function (_x, _x2) {
     return _ref.apply(this, arguments);
-  };
-}()).post(
-/*#__PURE__*/
-function () {
-  var _ref5 = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee5(req, res) {
-    var user, result;
-    return regeneratorRuntime.wrap(function _callee5$(_context5) {
-      while (1) {
-        switch (_context5.prev = _context5.next) {
-          case 0:
-            _context5.prev = 0;
-            req.body.password = _bcryptjs["default"].hashSync(req.body.password + process.env.SALT, 10);
-            user = new _users["default"](req.body);
-            _context5.next = 5;
-            return user.save();
-
-          case 5:
-            result = _context5.sent;
-            res.send(result);
-            _context5.next = 12;
-            break;
-
-          case 9:
-            _context5.prev = 9;
-            _context5.t0 = _context5["catch"](0);
-            return _context5.abrupt("return", res.status(500).json({
-              error: _context5.t0.message
-            }));
-
-          case 12:
-          case "end":
-            return _context5.stop();
-        }
-      }
-    }, _callee5, null, [[0, 9]]);
-  }));
-
-  return function (_x6, _x7) {
-    return _ref5.apply(this, arguments);
   };
 }());
 module.exports = router;

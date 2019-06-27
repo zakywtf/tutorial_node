@@ -1,9 +1,11 @@
 import xpress from 'express'
 import dotenv from 'dotenv'
 import log from './controller/log'
-import users from './controller/users'
+import users from './controller/users/users'
 import login from './controller/login'
 import signup from './controller/signup'
+import vehicles from './controller/vehicles/vehicles'
+import add_vehicles from './controller/vehicles/add_vehicles'
 import { connectDb } from './config/db';
 import bodyParser from 'body-parser'
 
@@ -25,6 +27,8 @@ app.use('/api/v1/log', log)
 app.use('/api/v1/users', users)
 app.use('/api/v1/login', login)
 app.use('/api/v1/signup', signup)
+app.use('/api/v1/add_vehicles', add_vehicles)
+app.use('/api/v1/vehicles', vehicles)
 
 connectDb().then(async () => {
     app.listen(process.env.PORT, '127.0.0.1', () =>
