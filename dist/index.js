@@ -14,6 +14,10 @@ var _signup = _interopRequireDefault(require("./controller/signup"));
 
 var _vehicles = _interopRequireDefault(require("./controller/vehicles/vehicles"));
 
+var _reviews = _interopRequireDefault(require("./controller/review/reviews"));
+
+var _add_review = _interopRequireDefault(require("./controller/review/add_review"));
+
 var _add_vehicles = _interopRequireDefault(require("./controller/vehicles/add_vehicles"));
 
 var _db = require("./config/db");
@@ -46,6 +50,8 @@ app.use('/api/v1/login', _login["default"]);
 app.use('/api/v1/signup', _signup["default"]);
 app.use('/api/v1/add_vehicles', _add_vehicles["default"]);
 app.use('/api/v1/vehicles', _vehicles["default"]);
+app.use('/api/v1/reviews', _reviews["default"]);
+app.use('/api/v1/add_review', _add_review["default"]);
 (0, _db.connectDb)().then(
 /*#__PURE__*/
 _asyncToGenerator(

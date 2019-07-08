@@ -32,7 +32,6 @@ var vehicles = Schema({
   color: String,
   fuel: String,
   transmition: String,
-  deskripsi: String,
-  rating: Number
+  deskripsi: String
 });
 module.exports = _mongoose["default"].model('vehicles', vehicles);

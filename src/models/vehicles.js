@@ -25,8 +25,7 @@ const vehicles = Schema({
     color:String,
     fuel:String,
     transmition:String,
-    deskripsi:String,
-    rating:Number
+    deskripsi:String
 })
 
 module.exports = mongoose.model('vehicles', vehicles);
