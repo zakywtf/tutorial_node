@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import LogModel from '../models/log_user'
+import LogModel from '../schema/log_user'
 import h from '../lib/ctrlHandler'
 import validateToken from '../lib/validateToken'
 

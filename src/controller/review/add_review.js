@@ -1,7 +1,7 @@
 import {Router} from 'express'
 import dotenv from 'dotenv'
-import add_reviews from '../../models/reviews'
-import userDetail from '../../models/user_detail'
+import add_reviews from '../../schema/reviews'
+import userDetail from '../../schema/user_detail'
 import validateToken from '../../lib/validateToken'
 import h from '../../lib/ctrlHandler'
 

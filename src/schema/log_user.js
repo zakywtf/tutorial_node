@@ -1,4 +1,5 @@
-import mongoose from 'mongoose'
+let mongoose = require('mongoose')
+
 
 const LogModel = mongoose.Schema({
     kota : String, 

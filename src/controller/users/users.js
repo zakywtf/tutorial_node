@@ -1,8 +1,8 @@
 import {Router} from 'express'
 import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv'
-import users from '../../models/users'
-import userDetail from '../../models/user_detail'
+import users from '../../schema/users'
+import userDetail from '../../schema/user_detail'
 import validateToken from '../../lib/validateToken'
 
 dotenv.config()
