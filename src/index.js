@@ -12,10 +12,16 @@ import bodyParser from 'body-parser'
 
 
 let app = xpress()
-
 dotenv.config()
+
+var server   = require('http').Server(app);
+var io       = require('socket.io')(server);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(function(req,res,next){
+  req.io = io;
+  next();
+});
 
 app.get('/', (req, res)=>{
     res.end('Hello world!')
@@ -32,8 +38,16 @@ app.use('/api/v1/vehicles', vehicles)
 app.use('/api/v1/reviews', reviews)
 app.use('/api/v1/add_review', add_review)
 
+io.on('connection', function (socket) {
+  socket.emit('tes')
+});
+
+app.get('/test/emit/:data',(req,res)=>{
+  req.io.sockets.emit(req.params.data);
+})
+
 connectDb().then(async () => {
     app.listen(process.env.PORT, '127.0.0.1', () =>
-      console.log('Connected!!'),
+      console.log(`Server connet on port ${process.env.PORT}`),
     );
 });
