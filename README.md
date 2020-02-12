@@ -1,3 +1,14 @@
 # tutorial_node
 
-CRUD using mongoose
+npm install --save
+
+
+
+npm start
+
+
+or 
+for debugging, 
+
+
+npm run debug
