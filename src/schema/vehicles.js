@@ -3,7 +3,7 @@ let mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const vehicles = Schema({
-    user_data :{ type: Schema.Types.ObjectId,autopopulate:true, ref: 'users' },
+    companyId:{ type: Schema.Types.ObjectId,autopopulate:true, ref: 'company' },
     type_vehicle: { type: String, required: true,enum:['1','2']},
     name:{type: String, required :true},
     vehicle_number:{type: String,required :true},
@@ -15,5 +15,7 @@ const vehicles = Schema({
     transmition:String,
     deskripsi:String
 })
+
+vehicles.plugin(require('mongoose-autopopulate'))
 
 module.exports = mongoose.model('vehicles', vehicles);

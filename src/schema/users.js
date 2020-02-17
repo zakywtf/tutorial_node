@@ -14,18 +14,5 @@ const users = mongoose.Schema({
 
 users.index({tekp:1},{unique:true})
 users.index({email:1},{unique:true})
-users.statics.toApiUserSchema = function(data) {
-    return data.map(function(user) {
-        return {
-            id: user.id,
-            username: user.username,
-            name: user.first_name+' '+user.last_name,
-            address: user.address,
-            telp: user.telp,
-            email: user.email,
-            role: user.role
-        }
-    })
-}
 
 module.exports = mongoose.model('users', users);

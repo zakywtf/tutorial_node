@@ -2,8 +2,8 @@ let mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const user_detail = Schema({
-    user_data :{ type: Schema.Types.ObjectId, autopopulate:true, ref: 'users' },
+const sch = new mongoose.Schema({
+    userId :{ type: Schema.Types.ObjectId, autopopulate:{ select: 'first_name last_name address telp email' }, ref: 'users' },
     company: { type: String, required: true},
     company_address:{ type: String, required: true},
     company_email:{ type: String, required: true},
@@ -12,5 +12,6 @@ const user_detail = Schema({
     end_time_available:{ type: String, required :true}
 })
 
+sch.plugin(require('mongoose-autopopulate'))
 
-module.exports = mongoose.model('user_detail', user_detail);
+module.exports = mongoose.model('company', sch);

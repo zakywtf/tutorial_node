@@ -1,15 +1,16 @@
 import xpress from 'express'
 import dotenv from 'dotenv'
 import log from './controller/log'
-import users from './controller/users/users'
+import users from './controller/users/usersCtrl'
+import company from './controller/company/companyCtrl';
 import login from './controller/login'
 import signup from './controller/signup'
-import vehicles from './controller/vehicles/vehicles'
+import vehicles from './controller/vehicles/vehiclesCtrl'
 import reviews from './controller/review/reviews'
 import add_review from './controller/review/add_review'
 import { connectDb } from './config/db';
 import bodyParser from 'body-parser'
-
+import validateToken from './lib/validateToken';
 
 let app = xpress()
 dotenv.config()
@@ -30,10 +31,14 @@ app.get('/', (req, res)=>{
 //     res.json()
 // })
 
+app.use('/api/login', login)
+app.use('/api/signup', signup)
+
+app.use('/api/v1/', validateToken)
+
 app.use('/api/v1/log', log)
 app.use('/api/v1/users', users)
-app.use('/api/v1/login', login)
-app.use('/api/v1/signup', signup)
+app.use('/api/v1/company', company)
 app.use('/api/v1/vehicles', vehicles)
 app.use('/api/v1/reviews', reviews)
 app.use('/api/v1/add_review', add_review)
