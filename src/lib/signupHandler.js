@@ -10,8 +10,8 @@ const signup = async(body) => {
     if(body.role == 2){
         let cmpny = new company({...body, userId : user._id})
         await cmpny.save()
-        return true
     }
+    return true
 }
 
 module.exports ={

@@ -12,7 +12,7 @@ const vehicles = Schema({
     seat:String,
     color:String,
     fuel:String,
-    transmition:String,
+    transmition:{ type: String, required: true,enum:['1','2']},
     deskripsi:String
 })
 

@@ -6,6 +6,13 @@ class companyModel extends Models{
         super(sch)
     }
 
+    async insert(body){
+        // console.log({udata:this.udata});
+        var obj = {...body, userId:this.udata.payload.id}
+        await this.model.create(obj)
+        return true
+    }
+    
 }
 
 module.exports=companyModel

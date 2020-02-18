@@ -12,7 +12,7 @@ const users = mongoose.Schema({
     create_at: {type:Date, default:Date.now}
 })
 
-users.index({tekp:1},{unique:true})
+users.index({telp:1},{unique:true})
 users.index({email:1},{unique:true})
 
 module.exports = mongoose.model('users', users);

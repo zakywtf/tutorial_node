@@ -5,7 +5,10 @@ const Schema = mongoose.Schema
 const sch = new mongoose.Schema({
     userId :{ type: Schema.Types.ObjectId, autopopulate:{ select: 'first_name last_name address telp email' }, ref: 'users' },
     company: { type: String, required: true},
-    company_address:{ type: String, required: true},
+    company_address:{
+        lat:{ type: String, required: true},
+        lon:{ type: String, required: true}
+    },
     company_email:{ type: String, required: true},
     company_telp:{ type: String, required: true},
     start_time_available:{ type: String, required :true},
