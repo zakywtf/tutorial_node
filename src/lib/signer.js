@@ -1,14 +1,18 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import users from '../schema/users'
+import {getGeoLocation} from '../lib/masterCache';
 
 const sign = async(body) => {
     let user = await checkUser(body)
-    console.log({body,user});
+    // console.log({body,user});
     
     if(user){
         let payload = await createPayload(user)
-        console.log({payload});
+        // console.log({payload});
+        var geoLoc = await getGeoLocation()
+        console.log({geoLoc});
+        
         if(bcrypt.compareSync(body.password+process.env.SALT, user.password)) {
             return await createToken(payload)
         }else{

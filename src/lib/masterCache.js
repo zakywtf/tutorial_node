@@ -1,8 +1,20 @@
+import fetch from 'node-fetch';
 import USERLOC from '../schema/user_location';
 import distance from 'geo-distance';
 import m from 'mongoose';
 
 const LOCATION_IDX={}
+
+const getData=async(url)=>await fetch(url).then(resp=>resp.json()).then(json=>json).catch(error=>error);
+
+const getGeoLocation = async() => {
+    // var url = `https://ipapi.co/json/`
+    try {
+        return await getData(process.env.GEO_LOCATION);
+    } catch (error) {
+        throw error;
+    }
+}
 
 const loadFirstData = async() => {
     // console.log('ini bisa');
@@ -71,5 +83,6 @@ module.exports = {
     loadFirstData,
     createUserLocation,
     getLocationIdx,
+    getGeoLocation,
     getVehiclesByRadius
 }
