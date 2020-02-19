@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import users from '../schema/users'
 import {getGeoLocation} from '../lib/masterCache';
 
-const sign = async(body) => {
+const sign = async(body, userAgent) => {
     let user = await checkUser(body)
     // console.log({body,user});
     
@@ -12,7 +12,7 @@ const sign = async(body) => {
         // console.log({payload});
         
         if(bcrypt.compareSync(body.password+process.env.SALT, user.password)) {
-            await getGeoLocation()
+            await getGeoLocation(userAgent)
             return await createToken(payload)
         }else{
             throw new Error('Wrong password!')

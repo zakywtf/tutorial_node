@@ -28,7 +28,7 @@ app.use(function(req,res,next){
 });
 
 app.get('/', (req, res)=>{
-  var message = `Have a nice day!`;
+  var message = 'Hello World!'
   res.send(message);
 })
 // app.use('/names', (req,res,next)=>{

@@ -8,18 +8,33 @@ const LOCATION_IDX={}
 
 const getData=async(url)=>await fetch(url).then(resp=>resp.json()).then(json=>json).catch(error=>error);
 
-const getGeoLocation = async() => {
+const getGeoLocation = async(userAgent) => {
     try {
         var body = await getData(process.env.GEO_LOCATION);
-        var createLog = await createLogUsers(body)
+        var createLog = await createLogUsers(body, userAgent)
         return createLog
     } catch (error) {
         throw error;
     }
 }
 
-const createLogUsers = async(body) => {
-    var obj = {...body, location:{lat:body.latitude, lon:body.longitude}}
+const createLogUsers = async(body, userAgent) => {
+    var obj = {
+        ...body, 
+        location:{
+            lat:body.latitude, 
+            lon:body.longitude
+        },
+        user_agent:{
+            browser:userAgent.browser,
+            version:userAgent.version,
+            os:userAgent.os,
+            platform:userAgent.platform,
+            source:userAgent.source
+        }
+    }
+    console.log({obj});
+    
     var uLog = new LOGUSER(obj)
     await uLog.save()
 }

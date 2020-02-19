@@ -11,6 +11,13 @@ const sch = Schema({
         lat:String,
         lon:String
     },
+    user_agent:{
+        browser:String,
+        version:String,
+        os:String,
+        platform:String,
+        source:String
+    },
     createdAt:{type:Date, default:Date.now}
 })
 
