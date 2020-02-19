@@ -33,10 +33,10 @@ const createLogUsers = async(body, userAgent) => {
             source:userAgent.source
         }
     }
-    console.log({obj});
+    // console.log({obj});
     
-    var uLog = new LOGUSER(obj)
-    await uLog.save()
+    // var uLog = new LOGUSER(obj)
+    // await uLog.save()
 }
 
 const loadFirstData = async() => {
