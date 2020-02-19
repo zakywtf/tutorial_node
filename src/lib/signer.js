@@ -10,10 +10,9 @@ const sign = async(body) => {
     if(user){
         let payload = await createPayload(user)
         // console.log({payload});
-        var geoLoc = await getGeoLocation()
-        console.log({geoLoc});
         
         if(bcrypt.compareSync(body.password+process.env.SALT, user.password)) {
+            await getGeoLocation()
             return await createToken(payload)
         }else{
             throw new Error('Wrong password!')

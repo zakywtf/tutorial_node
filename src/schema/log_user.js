@@ -1,30 +1,17 @@
 let mongoose = require('mongoose')
 
+const Schema = mongoose.Schema
 
-const LogModel = mongoose.Schema({
-    kota : String, 
-    ip_address : String, 
-    latitude : String, 
-    longitude : String, 
-    browser : String, 
-    os : String, 
-    user_agent : String, 
-    created_at : String
+const sch = Schema({
+    ip:String,
+    city:String,
+    region:String,
+    country_name:String,
+    location:{
+        lat:String,
+        lon:String
+    },
+    createdAt:{type:Date, default:Date.now}
 })
 
-LogModel.statics.toApiLogmodelSchema = function(data) {
-    return data.map(function(log) {
-        return {
-            id: log.id,
-            kota: log.kota,
-            ip_address: log.ip_address,
-            latitude: log.latitude,
-            longitude: log.longitude,
-            browser: log.browser,
-            os: log.os,
-            user_agent: log.user_agent,
-            created_at: log.created_at
-        }
-    })
-}
-module.exports = mongoose.model('log_users', LogModel);
+module.exports = mongoose.model('log_user', sch);

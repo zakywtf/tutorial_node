@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import USERLOC from '../schema/user_location';
+import LOGUSER from '../schema/log_user';
 import distance from 'geo-distance';
 import m from 'mongoose';
 
@@ -8,12 +9,19 @@ const LOCATION_IDX={}
 const getData=async(url)=>await fetch(url).then(resp=>resp.json()).then(json=>json).catch(error=>error);
 
 const getGeoLocation = async() => {
-    // var url = `https://ipapi.co/json/`
     try {
-        return await getData(process.env.GEO_LOCATION);
+        var body = await getData(process.env.GEO_LOCATION);
+        var createLog = await createLogUsers(body)
+        return createLog
     } catch (error) {
         throw error;
     }
+}
+
+const createLogUsers = async(body) => {
+    var obj = {...body, location:{lat:body.latitude, lon:body.longitude}}
+    var uLog = new LOGUSER(obj)
+    await uLog.save()
 }
 
 const loadFirstData = async() => {
