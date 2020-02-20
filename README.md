@@ -11,4 +11,4 @@ or
 for debugging, 
 
 
-npm run debug
+npm run debug >> /dev/null
