@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 import USERLOC from '../schema/user_location';
 import LOGUSER from '../schema/log_user';
+import REVIEWS from '../schema/reviews'
 import distance from 'geo-distance';
 import m from 'mongoose';
 
@@ -100,6 +101,20 @@ const getVehiclesByRadius = async(udata, vehicles) => {
     return resp
 }
 
+const getReviews = async(vehicleId) => {
+    var datas = await REVIEWS.find({vehicleId:m.Types.ObjectId(vehicleId)})
+    var result = 0
+    var avg = 0
+    for (let i = 0; i < datas.length; i++) {
+        const data = datas[i];
+        result += data.rating
+        avg = i+1
+    }
+    console.log({total:result/avg});
+    
+    return {reviewsData:datas, totalRating:result/avg}
+}
+
 const getLocationIdx=()=>LOCATION_IDX
 
 module.exports = {
@@ -107,5 +122,6 @@ module.exports = {
     createUserLocation,
     getLocationIdx,
     getGeoLocation,
-    getVehiclesByRadius
+    getVehiclesByRadius,
+    getReviews
 }

@@ -7,8 +7,7 @@ import userLoc from './controller/user_location/userLocCtrl';
 import login from './controller/login'
 import signup from './controller/signup'
 import vehicles from './controller/vehicles/vehiclesCtrl'
-import reviews from './controller/review/reviews'
-import add_review from './controller/review/add_review'
+import reviews from './controller/reviews/reviewsCtrl'
 import { connectDb } from './config/db';
 import bodyParser from 'body-parser'
 import validateToken from './lib/validateToken';
@@ -45,7 +44,6 @@ app.use('/api/v1/users', users)
 app.use('/api/v1/company', company)
 app.use('/api/v1/vehicles', vehicles)
 app.use('/api/v1/reviews', reviews)
-app.use('/api/v1/add_review', add_review)
 app.use('/api/v1/user_location', userLoc)
 
 io.on('connection', function (socket) {
