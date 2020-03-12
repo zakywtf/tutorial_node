@@ -1,4 +1,6 @@
 import jwt from 'jsonwebtoken'
+import moment from 'moment';
+import {getLastOnline} from '../lib/checkLastOnline';
 
 const SESSION = []
 
@@ -21,7 +23,9 @@ const createSession = async(token) => {
     if(cekSesi == true){
         var datas = {
             udata:udata,
-            session:true
+            session:true,
+            isOnline:true,
+            lastOnline:moment().format('YYYY-MM-DD HH:mm:ss')
         }
         setTimeout(()=>{
             deleteSession(udata)
@@ -38,8 +42,16 @@ const createSession = async(token) => {
 }
 
 const deleteSession = async(udata) => {
-    delete SESSION[`${udata.id}`]
-    console.log(`sesi untuk ${udata.id}, sudah berakhir`);
+    var datas = {
+        udata:udata,
+        session:false,
+        isOnline:false,
+        lastOnline:moment().format('YYYY-MM-DD HH:mm:ss')
+
+    }
+    SESSION[`${udata.id}`] = datas
+    console.log(SESSION, 'sesi berakhir');
+
 }
 
 const checkSession = async(udata) => {
@@ -52,6 +64,18 @@ const checkSession = async(udata) => {
     }
 }
 
+const getSession=async(id)=>{
+    // console.log({id});
+    var data = SESSION[`${id}`]
+    if(data != undefined){
+        return (data.isOnline == true)?`Online`:await getLastOnline(data.lastOnline)
+    }else{
+        return `Offline`
+    }
+};
+
+
 module.exports = {
-    createSession
+    createSession,
+    getSession
 }

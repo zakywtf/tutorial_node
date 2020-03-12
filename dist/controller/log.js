@@ -2,7 +2,7 @@
 
 var _express = require("express");
 
-var _log_user = _interopRequireDefault(require("../models/log_user"));
+var _log_user = _interopRequireDefault(require("../schema/log_user"));
 
 var _ctrlHandler = _interopRequireDefault(require("../lib/ctrlHandler"));
 

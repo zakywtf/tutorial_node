@@ -1,6 +1,6 @@
-import Models from '../../classes/classModel';
-import sch from '../../schema/vehicles';
-import {getLocationIdx, getVehiclesByRadius, getReviews} from '../../lib/masterCache';
+import Models from '../classes/classModel';
+import sch from '../schema/vehicles';
+import {getLocationIdx, getVehiclesByRadius, getReviews} from '../lib/masterCache';
 
 class vehicleModel extends Models{
     constructor(){

@@ -1,5 +1,5 @@
-import Models from '../../classes/classModel';
-import sch from '../../schema/reviews';
+import Models from '../classes/classModel';
+import sch from '../schema/reviews';
 
 class reviewsModel extends Models{
     constructor(){

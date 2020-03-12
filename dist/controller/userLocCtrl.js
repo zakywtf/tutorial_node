@@ -1,12 +1,10 @@
 "use strict";
 
-var _express = require("express");
+var _classController = require("../classes/classController");
+
+var _userLocModel = _interopRequireDefault(require("../model/userLocModel"));
 
 var _ctrlHandler = _interopRequireDefault(require("../lib/ctrlHandler"));
-
-var _signer = require("../lib/signer");
-
-var _expressUseragent = _interopRequireDefault(require("express-useragent"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -14,9 +12,9 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var router = (0, _express.Router)();
-router.use(_expressUseragent["default"].express());
-router.route('/').post(
+var model = new _userLocModel["default"]();
+var rtr = (0, _classController.controller)(model);
+rtr.post('/set_location',
 /*#__PURE__*/
 function () {
   var _ref = _asyncToGenerator(
@@ -32,17 +30,19 @@ function () {
               var _ref2 = _asyncToGenerator(
               /*#__PURE__*/
               regeneratorRuntime.mark(function _callee(body) {
+                var udata;
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                   while (1) {
                     switch (_context.prev = _context.next) {
                       case 0:
-                        _context.next = 2;
-                        return (0, _signer.sign)(body, req.useragent);
-
-                      case 2:
-                        return _context.abrupt("return", _context.sent);
+                        udata = res.locals.udata.payload;
+                        _context.next = 3;
+                        return model.setLocation(body, udata);
 
                       case 3:
+                        return _context.abrupt("return", _context.sent);
+
+                      case 4:
                       case "end":
                         return _context.stop();
                     }
@@ -67,4 +67,4 @@ function () {
     return _ref.apply(this, arguments);
   };
 }());
-module.exports = router;
+module.exports = rtr;

@@ -1,6 +1,6 @@
-import {controller} from '../../classes/classController';
-import m from '../../model/vehicles/vehicleModel'
-import handleRequest from '../../lib/ctrlHandler'
+import {controller} from '../classes/classController';
+import m from '../model/vehicleModel'
+import handleRequest from '../lib/ctrlHandler'
 
 let model = new m()
 let rtr = controller(model)
